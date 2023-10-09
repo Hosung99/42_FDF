@@ -1,19 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_free_ptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seoson <seoson@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/27 16:05:10 by seoson            #+#    #+#             */
-/*   Updated: 2023/10/02 15:00:42 by seoson           ###   ########.fr       */
+/*   Created: 2023/10/02 16:24:05 by seoson            #+#    #+#             */
+/*   Updated: 2023/10/04 13:32:25 by seoson           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_error(char *str)
+void	ft_free_ptr(char **ptr)
 {
-	write(2, str, ft_strlen(str));
-	exit(1);
+	int	i;
+
+	i = 0;
+	while (ptr[i])
+	{
+		free(ptr[i]);
+		i++;
+	}
+	free(ptr);
+}
+
+void	ft_free_map(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->height)
+	{
+		free(map->point[i]);
+		i++;
+	}
+	free(map->point);
 }

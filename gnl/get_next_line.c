@@ -6,7 +6,7 @@
 /*   By: seoson <seoson@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 13:10:38 by seoson            #+#    #+#             */
-/*   Updated: 2023/05/01 17:53:59 by seoson           ###   ########.fr       */
+/*   Updated: 2023/10/03 13:39:05 by seoson           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ char	*init_s(char *s, int fd)
 	if (fd < 0)
 		return (0);
 	total_len = 0;
-	len = ft_strlen(s);
+	len = ft_strlen2(s);
 	temp = (char *)malloc(sizeof(char) * len + 1);
 	if (!temp)
 		return (0);
-	ft_strlcpy(temp, s, len + 1);
+	ft_strlcpy2(temp, s, len + 1);
 	while (s[total_len])
 		total_len++;
-	ft_strlcpy(s, &s[len], total_len + 1 - len);
+	ft_strlcpy2(s, &s[len], total_len + 1 - len);
 	return (temp);
 }
 
@@ -52,7 +52,7 @@ int	init_b(char *temp, char **buff, int *check, int fd)
 		return (0);
 	}
 	*check = do_read(*buff, fd);
-	if (*check == -1 || (*check == 0 && ft_strlen(temp) == 0))
+	if (*check == -1 || (*check == 0 && ft_strlen2(temp) == 0))
 	{
 		free(temp);
 		free(*buff);
@@ -77,11 +77,12 @@ char	*get_next_line(int fd)
 	{
 		if (has_newline(buff))
 		{
-			ft_strlcpy(s, &buff[ft_strlen(buff)], check + 1 - ft_strlen(buff));
-			temp = ft_strjoin(temp, buff, ft_strlen(buff));
+			ft_strlcpy2(s, &buff[ft_strlen2(buff)], \
+				check + 1 - ft_strlen2(buff));
+			temp = ft_strjoin2(temp, buff, ft_strlen2(buff));
 			break ;
 		}
-		temp = ft_strjoin(temp, buff, ft_strlen(buff));
+		temp = ft_strjoin2(temp, buff, ft_strlen2(buff));
 		check = do_read(buff, fd);
 	}
 	return (free(buff), temp);
